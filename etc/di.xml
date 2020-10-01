@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\Request\PathInfo">
+        <plugin name="Elgentos_BaseUrlPath_Plugin_Frontend_Magento_Framework_App_Request_PathInfo"
+                type="Elgentos\BaseUrlPath\Plugin\Frontend\Magento\Framework\App\Request\PathInfo"/>
+    </type>
+</config>
