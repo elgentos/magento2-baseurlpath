@@ -1,0 +1,33 @@
+{
+    "name": "elgentos/module-baseurlpath",
+    "description": "Allow Magento config to have a base url path instead of root without moving Magento 2 into a subdirectory",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Jeroen Boersma",
+            "email": "jeroen@elgentos.nl"
+        }
+    ],
+    "require": {
+        "magento/framework": "*",
+        "magento/module-store": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.5.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Elgentos\\BaseUrlPath\\": ""
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ]
+}
