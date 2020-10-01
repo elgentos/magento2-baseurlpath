@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/elgentos/magento2-baseurlpath.svg?branch=main)](https://travis-ci.org/elgentos/magento2-baseurlpath)
 # Magento 2 - Elgentos_BaseUrlPath
 Allow setting up a base url in system config other than root.
 
