@@ -160,4 +160,28 @@ class PluginPathInfoTest extends TestCase
         $this->assertSame('/one', $baseUrl);
     }
 
+    public function testShouldNeverReturnASlash()
+    {
+        $scopeConfigMock = $this->scopeConfigMock;
+        $httpRequestMock = $this->httpRequestMock;
+        $pathInfoRequest = $this->pathInfoRequest;
+
+        $httpRequestMock->expects($this->once())
+            ->method('getServerValue')
+            ->willReturn('default');
+
+        $scopeConfigMock->expects($this->exactly(2))
+            ->method('getValue')
+            ->withConsecutive(['web/unsecure/base_url', ScopeInterface::SCOPE_STORE, 'default'], ['web/secure/base_url', ScopeInterface::SCOPE_STORE, 'default'])
+            ->willReturn('http://localhost.local.host/', 'http://localhost.remote.host/');
+
+        $pathInfo = new PathInfo(
+            $scopeConfigMock,
+            $httpRequestMock
+        );
+
+        [, $baseUrl] = $pathInfo->beforeGetPathInfo($pathInfoRequest, '', '');
+        $this->assertSame('', $baseUrl);
+    }
+
 }
