@@ -82,6 +82,10 @@ class PathInfo
             return;
         }
 
+        if ($unsecurePath === '/') {
+            return;
+        }
+
         $this->baseUrl = '/' . trim($unsecurePath, '/');
     }
 }
