@@ -9,5 +9,5 @@ before_script:
   - composer config http-basic.$COMPOSER_MAGENTO_REPO_HOST $COMPOSER_MAGENTO_REPO_USERNAME $COMPOSER_MAGENTO_REPO_PASSWORD 
   - composer install --prefer-dist -o
 
-script: "vendor/bin/phpunit --config phpunit.xml.dist"
+script: "vendor/bin/phpunit --config phpunit.xml.dist --coverage-text"
 
