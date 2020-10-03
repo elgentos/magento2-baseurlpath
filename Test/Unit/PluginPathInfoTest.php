@@ -184,4 +184,35 @@ class PluginPathInfoTest extends TestCase
         $this->assertSame('', $baseUrl);
     }
 
+    public function testShouldNotChangeBaseUrlIfNotEmptyAndShouldLeaveRequestUriUnchanged()
+    {
+        $scopeConfigMock = $this->scopeConfigMock;
+        $httpRequestMock = $this->httpRequestMock;
+        $pathInfoRequest = $this->pathInfoRequest;
+
+        $httpRequestMock->method('getServerValue')
+            ->willReturn('default');
+
+        $scopeConfigMock->method('getValue')
+            ->withConsecutive(['web/unsecure/base_url', ScopeInterface::SCOPE_STORE, 'default'], ['web/secure/base_url', ScopeInterface::SCOPE_STORE, 'default'])
+            ->willReturn('http://localhost.local.host/', 'http://localhost.remote.host/');
+
+        $pathInfo = new PathInfo(
+            $scopeConfigMock,
+            $httpRequestMock
+        );
+
+        [$requestUri, $baseUrl] = $pathInfo->beforeGetPathInfo($pathInfoRequest, '', '/magento');
+        $this->assertSame('', $requestUri);
+        $this->assertSame('/magento', $baseUrl);
+
+        [$requestUri, $baseUrl] = $pathInfo->beforeGetPathInfo($pathInfoRequest, '/request', '/test');
+        $this->assertSame('/request', $requestUri);
+        $this->assertSame('/test', $baseUrl);
+
+        [$requestUri, $baseUrl] = $pathInfo->beforeGetPathInfo($pathInfoRequest, '/request', '');
+        $this->assertSame('/request', $requestUri);
+        $this->assertSame('', $baseUrl);
+    }
+
 }
