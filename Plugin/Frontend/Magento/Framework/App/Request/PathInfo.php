@@ -68,9 +68,12 @@ class PathInfo
         }
 
         $unsecureBaseUrl = $this->scopeConfig->getValue('web/unsecure/base_url', ScopeInterface::SCOPE_STORE, $mageRunCode);
-        $unsecurePath = parse_url($unsecureBaseUrl, PHP_URL_PATH);
-
         $secureBaseUrl = $this->scopeConfig->getValue('web/secure/base_url', ScopeInterface::SCOPE_STORE, $mageRunCode);
+        if (null === $unsecureBaseUrl || null === $secureBaseUrl) {
+            return;
+        }
+
+        $unsecurePath = parse_url($unsecureBaseUrl, PHP_URL_PATH);
         $securePath = parse_url($secureBaseUrl, PHP_URL_PATH);
 
         // Only allow if set for both, secure and unsecure to avoid conflicts
