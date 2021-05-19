@@ -25,7 +25,7 @@ class PluginPathInfoTest extends TestCase
     private $pathInfoRequest;
 
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $scopeConfigMock = $this->createMock(ScopeConfigInterface::class);
         $httpRequestMock = $this->getMockBuilder(Http::class)
